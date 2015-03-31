@@ -11,5 +11,4 @@ Semestrální projekt předmětu 155YFSG (akademický rok 2014/2015)
 
 # Zadání
 
-TODO
-pokus
+Cílem semestrálního projektu je vytvoření tutoriálu na téma hydrologické analýzy pro GRASS GIS.
