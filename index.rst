@@ -202,7 +202,7 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 
 				
 		Rastrovou mapu akumulace odtoku v každé buňce (flow accumulation) vytvoříme pomocí modulu r.terraflow, dále je vytvořena mapa 
-		směru odtoku do sousední buňky s největším sklonem (flow direction), vyhlazený DMT (filled elevation). Vstupem je DMT. obrázek r_terraflow, rastrová mapa accu_cely, accu_vyrez
+		směru odtoku do sousední buňky s největším sklonem (flow direction), vyhlazený DMT (filled elevation). Vstupem je DMT. 
 
 		.. figure:: images/r_terraflow.png
  			 :class: large
