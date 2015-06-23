@@ -32,7 +32,7 @@ Vodní erozi způsobuje:
 	*	problematický pohyb strojů po pozemcích
 	*	ztrátu osiv, sadby, hnojiv a přípravků na ochranu rostlin
 
-	-> ohrožuje produkční funkce půdy a je příčinou velkých škod v intravilánech obcí
+	→ ohrožuje produkční funkce půdy a je příčinou velkých škod v intravilánech obcí
 
 .. figure:: images/kukurice-eroze.png
   
@@ -49,6 +49,7 @@ se očekával nový postoj k využití a ochraně půdy (šetrnější hospodař
 rozmanitost plodin) 
 
 **Hlavní možnosti ochrany půdy před erozí (dnes)**
+
 	*	v rámci plánu společných zařízení (5 - 7% plochy) při pozemkových úpravách realizovat protierozní opatření (PEO):
 				*	meze, příkopy, průlehy, hrázky, terasy, nádrže, zatravněné údolnice
 				*	TTP (sklon nad 25%), zalesnění, vhodné plodiny - pásové střídání, nepřekročení přípustné délky svahu
@@ -117,11 +118,71 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 		Pro zemědělské pozemky v ČR se používá průměrná hodnota R faktoru 
 		
 		(:math:`R = 40 \, MJ.ha^{-1} .cm.h^{-1}`)
-	*	**K faktor erodovatelnosti půdy (náchylnost půdy k erozi)** - odnos půdy v tunách z 1 ha na jednotku dešťového faktoru R ze standardního pozemku, závisí na textuře, struktuře, propustnosti, obsahu organické hmoty.
-		
-		Určení:
+	*	**K faktor, C faktor**
+		K faktor erodovatelnosti půdy (náchylnost půdy k erozi) - odnos půdy v tunách z 1 ha na jednotku dešťového faktoru R ze standardního pozemku, závisí na textuře, struktuře, propustnosti, obsahu organické hmoty.
 		Přibližně podle bonitační soustavy půd (BPEJ), nutno znát hodnotu HPJ: 2 a 3 čísla kódu BPEJ. Pokud pro některou HPJ není uvedena hodnota K faktoru, lze určit podle klasifikace půd.
-	*	**LS faktor délky a sklonu svahu** - s rostoucí délkou a se zvětšujícím se sklonem svahu se zvyšuje intenzita eroze.
+		
+		C faktor ochranného vlivu vegetace - vegetace chrání povrch půdy před dešťovými kapkami, zpomaluje rychlost povrchového odtoku.
+		Hodnoty C faktoru určeny na základě využití území.
+		
+		Vrstvu obsahující HPJ a vrstvu obsahující informace o komplexním průzkumu půd spojíme dohromady pomocí modulu v.overflow, přepínač OR ­ union (obrázek Dialogové okno modulu v.overlay)
+		
+		.. figure:: images/v_overlay.png
+			 :class: large
+							
+			 *Dialogové okno modulu v.overlay* 
+		
+		Vzniklou vrstvu propojíme ještě s vrstvou využití území, modul v.overflow, přepínač AND ­ *intersect*.
+		
+		.. todo:: **PROBLÉM:** modul v.overflow v Qgisu nefunguje → použit ArcGis
+		
+		.. figure:: images/v_overlay_intersect.png
+			 :class: large
+							
+			 *Dialogové okno modulu v.overlay* 
+		
+		Nyní do atributové tabulky výsledné polygonové vrstvy přidáme sloupce: Název ­ K, C a K_C, typ ­ Desetinné číslo. 
+		Do sloupců přiřadíme jednotlivé hodnoty pomocí nástroje Kalkulátor polí (ikona počítadla, nachází se na posledním místě v horní liště atributové tabulky),
+		příklad je na obrázku kalkulacka_K. Prvky, které se mají aktualizovat, jsme vybrali pomocí čtvrté ikony zleva v horní liště - *Vybrat prvky pomocí vzorce*.
+		
+		.. figure:: images/novy_sloupec.png
+			 :class: large
+							
+			 *Přidání nového sloupce do atributové tabulky - ikony* 
+		
+		.. figure:: images/add_column.png
+			 :class: large
+							
+			 *Přidání nového sloupce do atributové tabulky* 
+		
+		.. figure:: images/kalkulacka_K.png
+			 :class: large
+							
+			 *Kalkulacka_K* 
+			 
+		V dalším kroku vektorovou mapu převedeme na rastrovou podobu pomocí modulu v.to.rast.attribute, 
+		který nastavíme: attr - K_C, rozsah Grass regionu - dmt10, velikost buňky Grass regionu - (1). 
+		
+		.. figure:: images/v_to_rast.png
+			 :class: large
+							
+			 *Dialogové okno modulu v.to.rast.attribute*
+		
+		.. todo:: **PROBLÉM** ­ vrstvu hpj_kpp_land jsem se podle tohohle modulu snažila převést → vyhodilo chybu s nelze načíst vrstvu
+		
+		
+		Pomocí modulu r.resamp.stats poté provedeme převzorkování na prostorové rozlišení DMT 10 m a to na základě průměru hodnot vypočteného
+		z hodnot okolních buněk. Tímto postupem zamezíme ztrátě informací, ke kterém by došlo při přímém převodu na rastr s rozlišením 10 m 
+		(při rasterizace se hodnota buňky rastru volí na základě polygonu, který prochází středem buňky nebo na základě polygonu, který zabírá 
+		největší část plochy buňky).
+		
+		.. figure:: images/r_resamp.png
+			 :class: large
+							
+			 *Dialogové okno modulu r.resamp*
+		
+
+		*	**LS faktor délky a sklonu svahu** - s rostoucí délkou a se zvětšujícím se sklonem svahu se zvyšuje intenzita eroze.
 		Vstupem do výpočtu LS faktoru je:
 
 			*	rastrová mapa akumulace odtoku v každé buňce (“Flow accumulation”)
@@ -151,13 +212,13 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 			 *Sklon svahu*
 
 				
-		Rastrovou mapu akumulace odtoku v každé buňce (flow accumulation) vytvoříme pomocí nástroje r.terraflow, dále je vytvořena mapa 
+		Rastrovou mapu akumulace odtoku v každé buňce (flow accumulation) vytvoříme pomocí modulu r.terraflow, dále je vytvořena mapa 
 		směru odtoku do sousední buňky s největším sklonem (flow direction), vyhlazený DMT (filled elevation). Vstupem je DMT. obrázek r_terraflow, rastrová mapa accu_cely, accu_vyrez
 
 		.. figure:: images/r_terraflow.png
  			 :class: large
 							  
-			 *Dialogové okno nástroje r.terraflow*
+			 *Dialogové okno modulu r.terraflow*
 
 		.. figure:: images/accu_cely2.png
 			 :class: large
@@ -197,8 +258,7 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 			
 		
 		
-	*	**C faktor ochranného vlivu vegetace** - vegetace chrání povrch půdy před dešťovými kapkami, zpomaluje rychlost povrchového odtoku.
-		Určení:
+
 	*	**P faktor účinnosti protierozních opatření** -  protierozní opatření nejsou na pozemcích uplatněna. 
 		
 		Určení:
