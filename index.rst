@@ -114,10 +114,9 @@ Zpracování jednotlivých faktorů USLE:
 Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 	*	**R faktor erozní účinnosti deště** - vyjadřuje účinek srážek na velikosti ztráty půdy
 		
-		Určení:
 		Pro zemědělské pozemky v ČR se používá průměrná hodnota R faktoru 
 		
-		(:math:`R = 40 \, MJ.ha^{-1} .cm.h^{-1}`)
+		:math:`R = 40 \, MJ.ha^{-1} .cm.h^{-1}`
 	*	**K faktor, C faktor**
 	
 		K faktor erodovatelnosti půdy (náchylnost půdy k erozi) - odnos půdy v tunách z 1 ha na jednotku dešťového faktoru R ze standardního pozemku, závisí na textuře, struktuře, propustnosti, obsahu organické hmoty.
