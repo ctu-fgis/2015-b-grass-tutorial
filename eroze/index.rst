@@ -1,4 +1,0 @@
-Eroze
-=====
-
-Výpočet pomocí USLE

@@ -119,6 +119,7 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 		
 		(:math:`R = 40 \, MJ.ha^{-1} .cm.h^{-1}`)
 	*	**K faktor, C faktor**
+	
 		K faktor erodovatelnosti půdy (náchylnost půdy k erozi) - odnos půdy v tunách z 1 ha na jednotku dešťového faktoru R ze standardního pozemku, závisí na textuře, struktuře, propustnosti, obsahu organické hmoty.
 		Přibližně podle bonitační soustavy půd (BPEJ), nutno znát hodnotu HPJ: 2 a 3 čísla kódu BPEJ. Pokud pro některou HPJ není uvedena hodnota K faktoru, lze určit podle klasifikace půd.
 		
@@ -170,18 +171,6 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 		
 		.. todo:: **PROBLÉM** ­ vrstvu hpj_kpp_land jsem se podle tohohle modulu snažila převést → vyhodilo chybu s nelze načíst vrstvu
 		
-		
-		Pomocí modulu r.resamp.stats poté provedeme převzorkování na prostorové rozlišení DMT 10 m a to na základě průměru hodnot vypočteného
-		z hodnot okolních buněk. Tímto postupem zamezíme ztrátě informací, ke kterém by došlo při přímém převodu na rastr s rozlišením 10 m 
-		(při rasterizace se hodnota buňky rastru volí na základě polygonu, který prochází středem buňky nebo na základě polygonu, který zabírá 
-		největší část plochy buňky).
-		
-		.. figure:: images/r_resamp.png
-			 :class: large
-							
-			 *Dialogové okno modulu r.resamp*
-		
-
 		*	**LS faktor délky a sklonu svahu** - s rostoucí délkou a se zvětšujícím se sklonem svahu se zvyšuje intenzita eroze.
 		Vstupem do výpočtu LS faktoru je:
 
@@ -255,23 +244,22 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander.
 							  
 			 *LS faktor*
 
-			
-		
-		
-
 	*	**P faktor účinnosti protierozních opatření** -  protierozní opatření nejsou na pozemcích uplatněna. 
 		
-		Určení:
 		:math:`P = 1`
 
+Nyní známe všechny hodnoty vstupující do výpočtu výsledné ztráty půdy - G. K výpočtu použijeme Rastrový kalkulátor, 
+kde mezisebou pronásobíme jednotlivé faktory dle vzorce: 
 
+.. math:: G = R \times K \times L \times S \times C \times P
+
+ 
 
 	
 Zdroje
 ----------
 * `[1] Metodika ochrany zemědělské půdy <http://fzp.czu.cz/vyzkum/metodiky/Metodika_Ochrana_zemedelske_pudy_pred_erozi.pdf>`_
-* `[2] Metodika_GIS.pdf <>`_
-* `[3] PEO <http://storm.fsv.cvut.cz/on_line/yhmh/YHMH_2011_2_PEO1xx.pdf>`_
-* `[4] USLE <http://storm.fsv.cvut.cz/on_line/vhk2/eroze%2006_USLE.pdf>`_
-* `[5] Fotografie eroze <http://www.vumop.cz/index.php?p=fotogalerie&site=default&tag_id=>`_
-* `[6] Informace o QGISu <https://cs.wikipedia.org/wiki/QGIS>`_
+* `[2] PEO <http://storm.fsv.cvut.cz/on_line/yhmh/YHMH_2011_2_PEO1xx.pdf>`_
+* `[3] USLE <http://storm.fsv.cvut.cz/on_line/vhk2/eroze%2006_USLE.pdf>`_
+* `[4] Fotografie eroze <http://www.vumop.cz/index.php?p=fotogalerie&site=default&tag_id=>`_
+* `[5] Informace o QGISu <https://cs.wikipedia.org/wiki/QGIS>`_
