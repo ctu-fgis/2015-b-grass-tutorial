@@ -111,7 +111,7 @@ Vstupní data:
 			okresu Kladno, jiho­západní část okresu Praha­západ a také část okresu Beroun.
 
 Zpracování jednotlivých faktorů USLE:
-Potřebné moduly spouštíme z menu Zpracování ­ Commander.
+Potřebné moduly spouštíme z menu Zpracování ­ Commander. Takto spuštěné moduly nejsou součástí QGISu, ale výpočet je proveden v GRASSu verze 6.4.4 a výstupní soubory jsou načteny do QGISu. 
 	*	**R faktor erozní účinnosti deště** - vyjadřuje účinek srážek na velikosti ztráty půdy
 		
 		Pro zemědělské pozemky v ČR se používá průměrná hodnota R faktoru 
