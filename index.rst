@@ -127,16 +127,16 @@ Potřebné moduly spouštíme z menu Zpracování ­ Commander. Takto spuštěn�
 		C faktor ochranného vlivu vegetace - vegetace chrání povrch půdy před dešťovými kapkami, zpomaluje rychlost povrchového odtoku.
 		Hodnoty C faktoru určeny na základě využití území.
 		
-		Vrstvu obsahující HPJ a vrstvu obsahující informace o komplexním průzkumu půd spojíme dohromady pomocí modulu v.overflow, přepínač OR ­ union (obrázek Dialogové okno modulu v.overlay)
+		Vrstvu obsahující HPJ a vrstvu obsahující informace o komplexním průzkumu půd spojíme dohromady pomocí modulu v.overlay, přepínač OR ­ union (obrázek Dialogové okno modulu v.overlay)
 		
 		.. figure:: images/v_overlay.png
 			 :class: large
 							
 			 *Dialogové okno modulu v.overlay* 
 		
-		Vzniklou vrstvu propojíme ještě s vrstvou využití území, modul v.overflow, přepínač AND ­ *intersect*.
+		Vzniklou vrstvu propojíme ještě s vrstvou využití území, modul v.overlay, přepínač AND ­ *intersect*.
 		
-		.. todo:: **PROBLÉM:** modul v.overflow v Qgisu nefunguje → použit ArcGis
+		.. todo:: **PROBLÉM:** modul v.overlay v Qgisu nefunguje → použit ArcGis
 		
 		.. figure:: images/v_overlay_intersect.png
 			 :class: large
